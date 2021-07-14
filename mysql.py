@@ -27,7 +27,7 @@ class edicion(wx.Frame):
 		numero = self.numero
 		nuevo_nombre = self.textfield1.GetValue()
 		nuevo_numero = self.textfield2.GetValue()
-		base_de_datos = MySQLdb.connect("localhost", "root", "", "agenda_telefonica")
+		base_de_datos = MySQLdb.connect(user="root", password="123456", host="127.0.0.1", database="agenda_telefonica")
 		conexion = base_de_datos.cursor()
 		sql = "update contactos set nombre='"+nuevo_nombre+"',numero='"+nuevo_numero+"' where (id='"+id+"')and(nombre='"+nombre+"')and(numero='"+numero+"')"
 		try:
@@ -50,7 +50,7 @@ class insertar(wx.Panel):
 		self.boton = wx.Button(self, -1, label="insertar", size=(180,25), pos=(110,80))
 		self.Bind(wx.EVT_BUTTON, self.OnClick, self.boton)
 	def OnClick(self, event):
-		base_de_datos = MySQLdb.connect("localhost", "root", "", "agenda_telefonica")
+		base_de_datos = MySQLdb.connect(user="root", password="123456", host="127.0.0.1", database="agenda_telefonica")
 		conexion = base_de_datos.cursor()
 		sql = "insert into contactos(nombre,numero) values('%s','%s')" % (self.nombre.GetValue(),self.numero.GetValue())
 		try:
@@ -82,7 +82,7 @@ class mostrar(wx.Panel):
 	def OnClick1(self, event):
 		self.tabla.DeleteAllItems()
 		self.boton2.Disable()
-		base_de_datos = MySQLdb.connect("localhost", "root", "", "agenda_telefonica")
+		base_de_datos = MySQLdb.connect(user="root", password="123456", host="127.0.0.1", database="agenda_telefonica")
 		conexion = base_de_datos.cursor()
 		sql = "select * from contactos"
 		try:
