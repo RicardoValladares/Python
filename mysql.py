@@ -1,7 +1,7 @@
 import wx
 import pymysql as MySQLdb
 
-#------------------------Formulario de edicion----------------------------#
+#------------------------Formulario de Edicion----------------------------#
 class edicion(wx.Frame):
 	def __init__(self, id, nombre, numero):
 		no_resize = wx.DEFAULT_FRAME_STYLE & ~ (wx.RESIZE_BORDER | wx.MAXIMIZE_BOX)
