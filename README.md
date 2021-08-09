@@ -1,5 +1,5 @@
 ## Preintalar Python con los modulos: 
-```batch
+```sh
 pip install PyMySQL
 pip install wxPython
 ```
