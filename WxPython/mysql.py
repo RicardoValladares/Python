@@ -9,9 +9,9 @@ class edicion(wx.Frame):
 		self.Bind(wx.EVT_CLOSE, self.close)
 		panel = wx.Panel(self, -1)
 		self.label1 = wx.StaticText(panel, -1, label="Nombre:", pos=(10,10))
-		self.textfield1 = wx.TextCtrl(panel, -1, size=(100,25), pos=(110,10))
+		self.textfield1 = wx.TextCtrl(panel, -1, size=(100,30), pos=(110,10))
 		self.label2 = wx.StaticText(panel, -1, label="Numero:", pos=(10,45))
-		self.textfield2 = wx.TextCtrl(panel, -1, size=(100,25), pos=(110,45))
+		self.textfield2 = wx.TextCtrl(panel, -1, size=(100,30), pos=(110,45))
 		self.boton = wx.Button(panel, -1, label="modificar", size=(100,25), pos=(110,80))
 		self.Bind(wx.EVT_BUTTON, self.OnClick, self.boton)
 		self.id = id
@@ -44,9 +44,9 @@ class insertar(wx.Panel):
 	def __init__(self, parent):
 		wx.Panel.__init__(self, parent)
 		self.label1 = wx.StaticText(self, -1, label="Nombre:", pos=(10,10))
-		self.nombre = wx.TextCtrl(self, -1, size=(180,25), pos=(110,10))
+		self.nombre = wx.TextCtrl(self, -1, size=(180,30), pos=(110,10))
 		self.label2 = wx.StaticText(self, -1, label="Numero:", pos=(10,45))
-		self.numero = wx.TextCtrl(self, -1, size=(180,25), pos=(110,45))
+		self.numero = wx.TextCtrl(self, -1, size=(180,30), pos=(110,45))
 		self.boton = wx.Button(self, -1, label="insertar", size=(180,25), pos=(110,80))
 		self.Bind(wx.EVT_BUTTON, self.OnClick, self.boton)
 	def OnClick(self, event):

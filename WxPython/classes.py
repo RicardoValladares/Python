@@ -31,13 +31,13 @@ class wxpython(wx.Frame):
 		panel = wx.Panel(self, -1)
 		#creamos los objetos#
 		self.label1 = wx.StaticText(panel, -1, label="Ingrese un numero:", pos=(10,10))
-		self.n1 = wx.TextCtrl(panel, -1, size=(100,25), pos=(160,10))
+		self.n1 = wx.TextCtrl(panel, -1, size=(100,30), pos=(160,10))
 		self.label2 = wx.StaticText(panel, -1, label="Ingrese un numero:", pos=(10,45))
-		self.n2 = wx.TextCtrl(panel, -1, size=(100,25), pos=(160,45))
+		self.n2 = wx.TextCtrl(panel, -1, size=(100,30), pos=(160,45))
 		self.boton = wx.Button(panel, -1, label="sumar", size=(100,25), pos=(160,80))
 		self.Bind(wx.EVT_BUTTON, self.OnClick, self.boton)
 		self.label3 = wx.StaticText(panel, -1, label="El resultado es:", pos=(10,115))
-		self.resultado = wx.TextCtrl(panel, -1, size=(100,25), pos=(160,115))
+		self.resultado = wx.TextCtrl(panel, -1, size=(100,30), pos=(160,115))
 	def OnClick(self, event):
 		try:
 			n1 = float(self.n1.GetValue())

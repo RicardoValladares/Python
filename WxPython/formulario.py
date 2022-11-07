@@ -8,9 +8,9 @@ class wxpython(wx.Frame):
 		panel = wx.Panel(self, -1)
 		#creamos los objetos#
 		self.label1 = wx.StaticText(panel, -1, label="Ingrese su nombre:", pos=(10,10))
-		self.nombre = wx.TextCtrl(panel, -1, size=(140,25), pos=(230,10))
+		self.nombre = wx.TextCtrl(panel, -1, size=(140,30), pos=(230,10))
 		self.label2 = wx.StaticText(panel, -1, label="Ingrese su password:", pos=(10,40))
-		self.password = wx.TextCtrl(panel, -1, size=(140,25), pos=(230,40), style=wx.TE_PASSWORD)
+		self.password = wx.TextCtrl(panel, -1, size=(140,30), pos=(230,40), style=wx.TE_PASSWORD)
 		self.bandera = wx.Image("sv.png", wx.BITMAP_TYPE_ANY)
 		#Python >= Version 3
 		if sys.hexversion >= 0x3000000:
