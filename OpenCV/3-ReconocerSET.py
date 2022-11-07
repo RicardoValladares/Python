@@ -5,7 +5,7 @@ import sys
 dataPath = os.path.abspath(os.getcwd()) + '/Data'
 templatePath = os.path.abspath(os.getcwd()) + '/Template'
 
-if (not (os.path.exists(templatePath + '/modeloLBPHFace.dat')))  or  (not (os.path.exists(templatePath + '/identificador.txt'))):
+if (not (os.path.exists(templatePath + '/modeloLBPHFace.dat')))  or  (not (os.path.exists(templatePath + '/identificador.txt')))  or  (not os.path.exists(os.path.abspath(os.getcwd()) + '/haarcascade_frontalface_default.xml')) :
     print('No se encontro entrenamiento previo') 
     sys.exit()
 

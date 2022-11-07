@@ -2,7 +2,7 @@ import cv2
 import os
 import imutils
 import shutil
-#import sys
+import sys
 
 dataPath = os.path.abspath(os.getcwd()) + '/Data'
 personPath = dataPath + '/Set' #Set de fotos que guardaremos
@@ -20,7 +20,12 @@ cap = cv2.VideoCapture(0) #Capturamos Fotos desde Camara
 #    sys.exit()
 #cap = cv2.VideoCapture(os.path.abspath(os.getcwd()) + '/Video.mp4')
 
-faceClassif = cv2.CascadeClassifier(os.path.abspath(os.getcwd()) + '/haarcascade_frontalface_default.xml') #Template para detectar caras
+#Template para detectar caras
+if not os.path.exists(os.path.abspath(os.getcwd()) + '/haarcascade_frontalface_default.xml'):
+    print('No se logro encontrar haarcascade_frontalface_default.xml') 
+    sys.exit()
+faceClassif = cv2.CascadeClassifier(os.path.abspath(os.getcwd()) + '/haarcascade_frontalface_default.xml')
+
 count = 0 # contador que usaremos hasta 300 fotos
 
 while True:    
