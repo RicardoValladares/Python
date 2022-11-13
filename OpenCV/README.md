@@ -19,3 +19,9 @@ python 2-EntrenarDAT.py
 python 3-ReconocerSET.py
 
 ```
+
+
+![Captura de Pantalla](https://raw.githubusercontent.com/RicardoValladares/Python/main/OpenCV/captura.png)
+
+
+
