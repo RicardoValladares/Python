@@ -8,8 +8,8 @@ pip install Flask-JWT-Extended
 ```bash
 curl --location --request POST "http://127.0.0.1:5002/ObtenerToken" \ 
 --header "Content-Type: application/json" \ 
---data-raw "{\
-	"username\":\"usuario\", 
+--data-raw "{
+	\"username\":\"usuario\", 
 	\"password\":\"contrasenia\"
 }"
 ```
