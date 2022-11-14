@@ -1,3 +1,9 @@
+## Preintalar Python con los modulos: 
+```sh
+pip install Flask
+pip install Flask-JWT-Extended
+```
+
 ### probar la api para obtener el token
 ```bash
 curl --location --request POST "http://127.0.0.1:5002/ObtenerToken" \ 
