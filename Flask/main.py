@@ -12,8 +12,8 @@ app.config["JWT_SECRET_KEY"] = "super-secret"
 jwt = JWTManager(app)
 
 
+#para usar el comando http instala httpie
 #http POST :5002/ObtenerToken username=usuario password=contrasenia
-#curl --location --request POST "http://127.0.0.1:5002/ObtenerToken" --header "Content-Type: application/json" --data-raw "{\"username\":\"usuario\", \"password\":\"contrasenia\"}"
 @app.route("/ObtenerToken", methods=["POST"])
 def ObtenerToken():
     username = request.json.get("username", None)
@@ -25,8 +25,8 @@ def ObtenerToken():
         return jsonify(access_token=access_token)
 
 
+#para usar el comando http instala httpie
 #http GET :5002/ServicioConToken Authorization:"Bearer $JWT" TipoDocumento=DUI NumeroDocumento=123456789-0
-#curl --location --request GET "http://127.0.0.1:5002/ServicioConToken" --header "Authorization: Bearer $JWT" --header "Content-Type: application/json" --data-raw "{\"TipoDocumento\": \"DUI\", \"NumeroDocumento\": \"123456789-0\"}"
 @app.route("/ServicioConToken", methods=["GET"])
 @jwt_required()
 def ServicioConToken():
