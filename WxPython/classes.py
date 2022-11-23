@@ -1,17 +1,19 @@
-import wx
+import tkinter as tk
+from tkinter import messagebox
 
 #------------------------classe sumar----------------------------#
 class sumar:
 	#inicializamos variables#
-	def __init__(self,n1, n2):
-		self.n1 = n1
-		self.n2 = n2
+	def __init__(self):
+		self.n1 = 0.0
+		self.n2 = 0.0
 		self.suma = 0.0
+	#metodos set#
 	def setn1(self, n1):
 		self.n1 = n1
 	def setn2(self, n2):
 		self.n2 = n2
-	#metodos get para retornar datos#
+	#metodos get#
 	def getsumar(self): 
 		self.suma=self.n1+self.n2
 		return str(self.n1) + "+" + str(self.n2) + "=" + str(self.suma)
@@ -23,36 +25,38 @@ class sumar:
 		self.suma=self.n1+self.n2 
 		return str(self.suma)
 
+
+
 #------------------------inicial----------------------------#
-class wxpython(wx.Frame):
-	def __init__(self):
-		no_resize = wx.DEFAULT_FRAME_STYLE & ~ (wx.RESIZE_BORDER | wx.MAXIMIZE_BOX)
-		wx.Frame.__init__(self, None, -1, title="Manejo de Clases", size=(270,185), style=no_resize)
-		panel = wx.Panel(self, -1)
-		#creamos los objetos#
-		self.label1 = wx.StaticText(panel, -1, label="Ingrese un numero:", pos=(10,10))
-		self.n1 = wx.TextCtrl(panel, -1, size=(100,30), pos=(160,10))
-		self.label2 = wx.StaticText(panel, -1, label="Ingrese un numero:", pos=(10,45))
-		self.n2 = wx.TextCtrl(panel, -1, size=(100,30), pos=(160,45))
-		self.boton = wx.Button(panel, -1, label="sumar", size=(100,25), pos=(160,80))
-		self.Bind(wx.EVT_BUTTON, self.OnClick, self.boton)
-		self.label3 = wx.StaticText(panel, -1, label="El resultado es:", pos=(10,115))
-		self.resultado = wx.TextCtrl(panel, -1, size=(100,30), pos=(160,115))
-	def OnClick(self, event):
-		try:
-			n1 = float(self.n1.GetValue())
-			n2 = float(self.n2.GetValue())
-			#invocamos la clase sumar#
-			clase = sumar(n1,n2)
-			#usamos una funcion get de la clase sumar#
-			self.resultado.SetValue(str(clase.getsumar()))
-		except ValueError:
-			wx.MessageBox("Introduzca numeros", "ERROR", wx.OK | wx.ICON_WARNING)
+my_w = tk.Tk()
+my_w.geometry("300x170")
+
+# evento del boton #
+def click():
+	try:
+		clase = sumar()
+		clase.setn1( float(n1.get()) )
+		clase.setn2( float(n2.get()) )
+		resultado.delete(0, tk.END)
+		resultado.insert(0, clase.getsumar())
+	except ValueError:
+		tk.messagebox.showerror(title="ERROR", message="Introduzca numeros")
 
 
-if __name__ == '__main__':
-	aplicacion = wx.App()
-	formulario = wxpython()
-	formulario.Show()
-	aplicacion.MainLoop()
-	
+label1=tk.Label(my_w,text='Ingrese un numero:')
+label1.place(x=10,y=10)
+n1=tk.Entry(my_w)
+n1.place(x=160,y=10)
+label2=tk.Label(my_w,text='Ingrese un numero:')
+label2.place(x=10,y=45)
+n2=tk.Entry(my_w)
+n2.place(x=160,y=45)
+boton=tk.Button(my_w, text="sumar", command=click)
+boton.place(x=160,y=80)
+label3=tk.Label(my_w,text='El resultado es:')
+label3.place(x=10,y=115)
+resultado=tk.Entry(my_w)
+resultado.place(x=160,y=115)
+# loop de espera mientras no se cierre el formulario #
+my_w.mainloop()
+
