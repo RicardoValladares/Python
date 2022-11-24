@@ -43,6 +43,7 @@ def click():
 # programa principal #
 if __name__ == "__main__":
 	my_w.geometry("300x170")
+	my_w.resizable(False, False)
 	label1=tk.Label(my_w,text='Ingrese un numero:')
 	label1.place(x=10,y=10)
 	n1=tk.Entry(my_w)
