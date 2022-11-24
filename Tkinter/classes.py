@@ -1,6 +1,6 @@
 import tkinter as tk
-from tkinter import messagebox
-my_w = tk.Tk()
+from tkinter import ttk
+from tkinter.messagebox import showinfo
 
 #------------------------classe sumar----------------------------#
 class sumar:
@@ -27,37 +27,43 @@ class sumar:
 		return str(self.suma)
 
 
+#------------------------classe App----------------------------#
+class App(tk.Tk):
+	def __init__(self):
+		super().__init__()
+		self.geometry("300x170")
+		self.title("Manejo de Clases")
+		self.resizable(False, False)
+		self.label1=ttk.Label(self,text='Ingrese un numero:')
+		self.label1.place(x=10,y=10)
+		self.n1=ttk.Entry(self, width=18)
+		self.n1.place(x=160,y=10)
+		self.label2=ttk.Label(self,text='Ingrese un numero:')
+		self.label2.place(x=10,y=45)
+		self.n2=ttk.Entry(self, width=18)
+		self.n2.place(x=160,y=45)
+		self.boton=ttk.Button(self, text="sumar", width=18)
+		self.boton['command'] = self.click
+		self.boton.place(x=160,y=80)
+		self.label3=ttk.Label(self,text='El resultado es:')
+		self.label3.place(x=10,y=115)
+		self.resultado=ttk.Entry(self, width=18)
+		self.resultado.place(x=160,y=115)
+	def click(self):
+		try:
+			#invocamos la clase sumar#
+			clase = sumar()
+			#usamos funciones set de la clase sumar#
+			clase.setn1( float(self.n1.get()) )
+			clase.setn2( float(self.n2.get()) )
+			self.resultado.delete(0, tk.END)
+			#usamos funciones get de la clase sumar#
+			self.resultado.insert(0, clase.getsumar())
+		except ValueError:
+			tk.messagebox.showerror(title="ERROR", message="Introduzca numeros")
 
-#------------------------inicial----------------------------#
-# evento del boton #
-def click():
-	try:
-		clase = sumar()
-		clase.setn1( float(n1.get()) )
-		clase.setn2( float(n2.get()) )
-		resultado.delete(0, tk.END)
-		resultado.insert(0, clase.getsumar())
-	except ValueError:
-		tk.messagebox.showerror(title="ERROR", message="Introduzca numeros")
 
-# programa principal #
+#------------------------ejecutamos si estamos en la ejecucion principal----------------------------#
 if __name__ == "__main__":
-	my_w.geometry("300x170")
-	my_w.resizable(False, False)
-	label1=tk.Label(my_w,text='Ingrese un numero:')
-	label1.place(x=10,y=10)
-	n1=tk.Entry(my_w, width=18)
-	n1.place(x=160,y=10)
-	label2=tk.Label(my_w,text='Ingrese un numero:')
-	label2.place(x=10,y=45)
-	n2=tk.Entry(my_w, width=18)
-	n2.place(x=160,y=45)
-	boton=tk.Button(my_w, text="sumar", command=click)
-	boton.place(x=160,y=80)
-	label3=tk.Label(my_w,text='El resultado es:')
-	label3.place(x=10,y=115)
-	resultado=tk.Entry(my_w, width=18)
-	resultado.place(x=160,y=115)
-	# loop de espera mientras no se cierre el formulario #
-	my_w.mainloop()
-
+	app = App()
+	app.mainloop()
