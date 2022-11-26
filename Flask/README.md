@@ -1,3 +1,4 @@
+
 ### Preintalar Python con los modulos 
 ```sh
 pip install Flask
@@ -7,12 +8,7 @@ pip install Flask-BasicAuth
 
 ### probar la api para obtener el token
 ```bash
-curl --location --request POST "http://127.0.0.1:5002/ObtenerToken" \ 
---header "Content-Type: application/json" \ 
---data-raw "{
-	\"username\":\"usuario\", 
-	\"password\":\"contrasenia\"
-}"
+curl --location --request POST "http://127.0.0.1:5002/ObtenerToken" --header "Authorization: Basic dXN1YXJpbzpjb250cmFzZW5pYQ==" --header "Content-Type: application/json" 
 ```
 
 ### probar la api con el token obtenido
