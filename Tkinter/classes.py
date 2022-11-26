@@ -37,18 +37,18 @@ class App(tk.Tk):
 		self.resizable(False, False)
 		self.label1=ttk.Label(self,text='Ingrese un numero:')
 		self.label1.place(x=10,y=10)
-		self.n1=ttk.Entry(self, width=19)
+		self.n1=ttk.Entry(self, width=18)
 		self.n1.place(x=160,y=10)
 		self.label2=ttk.Label(self,text='Ingrese un numero:')
 		self.label2.place(x=10,y=45)
-		self.n2=ttk.Entry(self, width=19)
+		self.n2=ttk.Entry(self, width=18)
 		self.n2.place(x=160,y=45)
 		self.boton=ttk.Button(self, text="sumar", width=18)
 		self.boton['command'] = self.click
 		self.boton.place(x=160,y=80)
 		self.label3=ttk.Label(self,text='El resultado es:')
 		self.label3.place(x=10,y=115)
-		self.resultado=ttk.Entry(self, width=19)
+		self.resultado=ttk.Entry(self, width=18)
 		self.resultado.place(x=160,y=115)
 	def click(self):
 		try:
