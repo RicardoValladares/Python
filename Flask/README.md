@@ -2,6 +2,7 @@
 ```sh
 pip install Flask
 pip install Flask-JWT-Extended
+pip install Flask-BasicAuth
 ```
 
 ### probar la api para obtener el token
