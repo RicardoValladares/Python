@@ -1,33 +1,28 @@
 from flask import Flask
 from flask import jsonify
 from flask import request
-
+from flask_basicauth import BasicAuth
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 
 app = Flask(__name__)
+app.config['BASIC_AUTH_USERNAME'] = 'usuario'
+app.config['BASIC_AUTH_PASSWORD'] = 'contrasenia'
+basic_auth = BasicAuth(app)
 app.config["JWT_SECRET_KEY"] = "super-secret"
 jwt = JWTManager(app)
 
 
-#para usar el comando http instala httpie
-#http POST :5002/ObtenerToken username=usuario password=contrasenia
-@app.route("/ObtenerToken", methods=["POST"])
+@app.route("/ObtenerToken", methods=["POST", "GET"])
+@basic_auth.required
 def ObtenerToken():
-    username = request.json.get("username", None)
-    password = request.json.get("password", None)
-    if username != "usuario" or password != "contrasenia":
-        return jsonify({"Dato": "No autorizado", "Error": 1}), 401
-    else:
-        access_token = create_access_token(identity=username)
-        return jsonify(access_token=access_token)
+    access_token = create_access_token(identity=app.config['BASIC_AUTH_USERNAME'])
+    return jsonify(access_token=access_token)
 
 
-#para usar el comando http instala httpie
-#http GET :5002/ServicioConToken Authorization:"Bearer $JWT" TipoDocumento=DUI NumeroDocumento=123456789-0
-@app.route("/ServicioConToken", methods=["GET"])
+@app.route("/ServicioConToken", methods=["POST", "GET"])
 @jwt_required()
 def ServicioConToken():
     try:
