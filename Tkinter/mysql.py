@@ -1,7 +1,8 @@
+import pymysql as MySQLdb
+import tkinter as tk
 from tkinter import *
 from tkinter import ttk
-
-lst = [(1,'Ricardo Valladares',73007300),(2,'Veronica Arias',77007700),(3,'Jorge Carcamo',22002200)]
+from tkinter.messagebox import showinfo
 
 class App(Tk):
     def __init__(self):
@@ -37,16 +38,60 @@ class App(Tk):
         self.boton3 = Button(self, text="eliminar")
         self.boton3['command'] = self.OnClick3
         self.boton3.grid(row=4, column=1, padx=10,pady=10)
-        for i in range(len(lst)):
-            self.tabla.insert("",'end',iid=lst[i][0],text=lst[i][0],values=(lst[i][0],lst[i][1],lst[i][2]))
+        base_de_datos = MySQLdb.connect(user="root", password="123456", host="127.0.0.1", database="agenda_telefonica")
+        conexion = base_de_datos.cursor()
+        sql = "select * from contactos"
+        try:
+            conexion.execute(sql)
+            for row in conexion.fetchall():
+                self.tabla.insert("",'end',iid=str(row[0]),text=str(row[0]),values=(str(row[0]),str(row[1]),str(row[2])))
+        except:
+            base_de_datos.rollback()
+            tk.messagebox.showerror(title="error", message="error de conexion")
+        base_de_datos.close()
     def OnClick1(self):
         for row in self.tabla.get_children():
             self.tabla.delete(row)
+        base_de_datos = MySQLdb.connect(user="root", password="123456", host="127.0.0.1", database="agenda_telefonica")
+        conexion = base_de_datos.cursor()
+        sql = "select * from contactos"
+        try:
+            conexion.execute(sql)
+            for row in conexion.fetchall():
+                self.tabla.insert("",'end',iid=str(row[0]),text=str(row[0]),values=(str(row[0]),str(row[1]),str(row[2])))
+        except:
+            base_de_datos.rollback()
+            tk.messagebox.showerror(title="error", message="error de conexion")
+        base_de_datos.close()
     def OnClick2(self):
-        self.tabla.insert("",'end',iid=len(self.tabla.get_children())+1,text=len(self.tabla.get_children())+1,values=(len(self.tabla.get_children())+1,self.textfield1.get(),self.textfield2.get()) )       
+        base_de_datos = MySQLdb.connect(user="root", password="123456", host="127.0.0.1", database="agenda_telefonica")
+        conexion = base_de_datos.cursor()
+        sql = "insert into contactos(nombre,numero) values('%s','%s')" % (self.textfield1.get(),self.textfield2.get())
+        try:
+            conexion.execute(sql)
+            base_de_datos.commit()
+            self.OnClick1()
+            tk.messagebox.showinfo(title="informacion", message="datos insertados")
+            self.textfield1.delete(0, tk.END)
+            self.textfield2.delete(0, tk.END)
+        except:
+            base_de_datos.rollback()
+            tk.messagebox.showerror(title="error", message="error de conexion")
+        base_de_datos.close()
     def OnClick3(self):
         item = self.tabla.item(self.tabla.focus())
-        print(item['text'])#values
+        base_de_datos = MySQLdb.connect(user="root", password="123456", host="127.0.0.1", database="agenda_telefonica")
+        conexion = base_de_datos.cursor()
+        sql = "delete from contactos where id=%s" % (item['text'])
+        try:
+            conexion.execute(sql)
+            base_de_datos.commit()
+            self.OnClick1()
+            tk.messagebox.showinfo(title="informacion", message="dato eliminado")
+        except:
+            base_de_datos.rollback()
+            tk.messagebox.showerror(title="error", message="error de conexion o no selecciono registro a eliminar")
+        base_de_datos.close()
         
 
 if __name__ == "__main__":
