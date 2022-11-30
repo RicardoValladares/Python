@@ -26,12 +26,12 @@ def ObtenerToken():
 @jwt_required()
 def ServicioConToken():
     try:
-        tipo = request.json.get("TipoDocumento", None)
-        dui = request.json.get("NumeroDocumento", None)
-        if tipo=="DUI" and dui=="123456789-0":
-            return jsonify({"Dato": "Documento Valido", "Error": 0})
-        else:
-            return jsonify({"Dato": "Documento Invalido", "Error": 0})
+        content = request.json
+        respuesta = jsonify({"Dato": "Documento Invalido", "Error": 0})
+        for recepcion in content['Documentos']:
+            if recepcion['TipoDocumento']=="DUI" and recepcion['NumeroDocumento']=="123456789-0":
+                respuesta = jsonify({"Dato": "Documento Valido", "Error": 0})
+        return respuesta
     except:
         return jsonify({"Dato": "JSON no valido", "Error": 1}), 401
 
@@ -51,24 +51,3 @@ if __name__ == "__main__":
 #gunicorn -w 4 -b 0.0.0.0:5002 --log-level=debug main:app --daemon
 #EJECUCION EN PROCEOS PARALELO CON CERTIFICADO HTTPS
 #gunicorn -w 4 -b 0.0.0.0:5002 --certfile=/etc/letsencrypt/live/apps.localhost.com-0001/fullchain.pem --keyfile=/etc/letsencrypt/live/apps.localhost.com-0001/privkey.pem --log-level=debug main:app --daemon
-    
-
-
-
-#EJECUCION NORMAL CON PYTHON
-#python main.py
-#EJECUCION EN PROCEOS PARALELO
-#gunicorn -w 4 -b 0.0.0.0:5002 --log-level=debug main:app --daemon
-#EJECUCION EN PROCEOS PARALELO CON CERTIFICADO HTTPS
-#gunicorn -w 4 -b 0.0.0.0:5002 --certfile=/etc/letsencrypt/live/apps.localhost.com-0001/fullchain.pem --keyfile=/etc/letsencrypt/live/apps.localhost.com-0001/privkey.pem --log-level=debug main:app --daemon
-
-
-
-#response = requests.get(...)
-#json_data = json.loads(response.text)
-#import json
-#jsonStr = '{ "Documentos": [{"Tipo":"DUI", "Numero":"04655777-8"}, {"Tipo":"Pasaporte", "Numero":"B04655777"}]}'
-#aList = json.loads(jsonStr)
-#for i in aList['Documentos']:
-#	print(i['Tipo'])
-#
