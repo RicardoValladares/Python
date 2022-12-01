@@ -1,8 +1,7 @@
 import pymysql as MySQLdb
-import tkinter as tk
 from tkinter import *
 from tkinter import ttk
-from tkinter.messagebox import showinfo
+from tkinter import messagebox
 
 class App(Tk):
     def __init__(self):
@@ -32,8 +31,8 @@ class App(Tk):
             self.tabla.column(i, width = 100)
         for i in self.columnas:
             self.tabla.heading(i, text =i)
-        self.escrol = ttk.Scrollbar(self,orient="vertical", command=self.tabla.yview)#V Scrollbar
-        self.tabla.configure(yscrollcommand=self.escrol.set)  # connect to Treeview
+        self.escrol = ttk.Scrollbar(self,orient="vertical", command=self.tabla.yview)
+        self.tabla.configure(yscrollcommand=self.escrol.set)
         self.escrol.grid(row=3,column=2,sticky='ns')
         self.boton3 = Button(self, text="eliminar")
         self.boton3['command'] = self.OnClick3
@@ -47,8 +46,9 @@ class App(Tk):
                 self.tabla.insert("",'end',iid=str(row[0]),text=str(row[0]),values=(str(row[0]),str(row[1]),str(row[2])))
         except:
             base_de_datos.rollback()
-            tk.messagebox.showerror(title="error", message="error de conexion")
+            messagebox.showerror(title="error", message="error de conexion")
         base_de_datos.close()
+
     def OnClick1(self):
         for row in self.tabla.get_children():
             self.tabla.delete(row)
@@ -61,8 +61,9 @@ class App(Tk):
                 self.tabla.insert("",'end',iid=str(row[0]),text=str(row[0]),values=(str(row[0]),str(row[1]),str(row[2])))
         except:
             base_de_datos.rollback()
-            tk.messagebox.showerror(title="error", message="error de conexion")
+            messagebox.showerror(title="error", message="error de conexion")
         base_de_datos.close()
+
     def OnClick2(self):
         base_de_datos = MySQLdb.connect(user="root", password="123456", host="127.0.0.1", database="agenda_telefonica")
         conexion = base_de_datos.cursor()
@@ -71,13 +72,14 @@ class App(Tk):
             conexion.execute(sql)
             base_de_datos.commit()
             self.OnClick1()
-            tk.messagebox.showinfo(title="informacion", message="datos insertados")
-            self.textfield1.delete(0, tk.END)
-            self.textfield2.delete(0, tk.END)
+            messagebox.showinfo(title="informacion", message="datos insertados")
+            self.textfield1.delete(0, END)
+            self.textfield2.delete(0, END)
         except:
             base_de_datos.rollback()
-            tk.messagebox.showerror(title="error", message="error de conexion")
+            messagebox.showerror(title="error", message="error de conexion")
         base_de_datos.close()
+    
     def OnClick3(self):
         item = self.tabla.item(self.tabla.focus())
         base_de_datos = MySQLdb.connect(user="root", password="123456", host="127.0.0.1", database="agenda_telefonica")
@@ -87,10 +89,10 @@ class App(Tk):
             conexion.execute(sql)
             base_de_datos.commit()
             self.OnClick1()
-            tk.messagebox.showinfo(title="informacion", message="dato eliminado")
+            messagebox.showinfo(title="informacion", message="dato eliminado")
         except:
             base_de_datos.rollback()
-            tk.messagebox.showerror(title="error", message="error de conexion o no selecciono registro a eliminar")
+            messagebox.showerror(title="error", message="error de conexion o no selecciono registro a eliminar")
         base_de_datos.close()
         
 

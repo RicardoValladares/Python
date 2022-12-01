@@ -1,6 +1,5 @@
-import tkinter as tk
-from tkinter import ttk
-from tkinter.messagebox import showinfo
+from tkinter import *
+from tkinter import messagebox
 
 
 #------------------------classe sumar----------------------------#
@@ -29,27 +28,28 @@ class sumar:
 
 
 #------------------------classe App----------------------------#
-class App(tk.Tk):
+class App(Tk):
 	def __init__(self):
 		super().__init__()
 		self.geometry("300x170")
 		self.title("Manejo de Clases")
 		self.resizable(False, False)
-		self.label1=ttk.Label(self,text='Ingrese un numero:')
+		self.label1=Label(self,text='Ingrese un numero:')
 		self.label1.place(x=10,y=10)
-		self.n1=ttk.Entry(self, width=18)
+		self.n1=Entry(self, width=18)
 		self.n1.place(x=160,y=10)
-		self.label2=ttk.Label(self,text='Ingrese un numero:')
+		self.label2=Label(self,text='Ingrese un numero:')
 		self.label2.place(x=10,y=45)
-		self.n2=ttk.Entry(self, width=18)
+		self.n2=Entry(self, width=18)
 		self.n2.place(x=160,y=45)
-		self.boton=ttk.Button(self, text="sumar", width=18)
+		self.boton=Button(self, text="sumar", width=15)
 		self.boton['command'] = self.click
 		self.boton.place(x=160,y=80)
-		self.label3=ttk.Label(self,text='El resultado es:')
+		self.label3=Label(self,text='El resultado es:')
 		self.label3.place(x=10,y=115)
-		self.resultado=ttk.Entry(self, width=18)
+		self.resultado=Entry(self, width=18)
 		self.resultado.place(x=160,y=115)
+	
 	def click(self):
 		try:
 			#invocamos la clase sumar#
@@ -57,11 +57,11 @@ class App(tk.Tk):
 			#usamos funciones set de la clase sumar#
 			clase.setn1( float(self.n1.get()) )
 			clase.setn2( float(self.n2.get()) )
-			self.resultado.delete(0, tk.END)
+			self.resultado.delete(0, END)
 			#usamos funciones get de la clase sumar#
 			self.resultado.insert(0, clase.getsumar())
 		except ValueError:
-			tk.messagebox.showerror(title="ERROR", message="Introduzca numeros")
+			messagebox.showerror(title="ERROR", message="Introduzca numeros")
 
 
 #------------------------ejecutamos si estamos en la ejecucion principal----------------------------#
