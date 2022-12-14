@@ -31,7 +31,7 @@ curl --location --request POST "http://127.0.0.1:5002/ServicioConToken" \
     },
     {
       \"TipoDocumento\": \"PASAPORTE\",
-      \"NumeroDocumento\": \"A04566888\"
+      \"NumeroDocumento\": \"A123456789\"
     }
   ] 
 }"
