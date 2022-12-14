@@ -1,9 +1,15 @@
 
 ### Preintalar Python con los modulos 
 ```sh
+pip install requests
 pip install Flask
 pip install Flask-JWT-Extended
 pip install Flask-BasicAuth
+```
+
+### probar la api con el link de test
+```bash
+curl http://127.0.0.1:5002/
 ```
 
 ### probar la api para obtener el token
